@@ -1,0 +1,7 @@
+{
+  "saladId" : "testsalad",
+  "name" : "Test Salad",
+  "imageUrl" : "testurl",
+  "available" : true,
+  "portions" : ["portion1", "portion2"]
+}

@@ -1,0 +1,6 @@
+{
+  "ingredientId" : "testingredient",
+  "name" : "Test Ingredient",
+  "imageUrl" : "testurl",
+  "available" : true
+}

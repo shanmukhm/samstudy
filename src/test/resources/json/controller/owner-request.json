@@ -1,0 +1,10 @@
+{
+  "ownerId":"testowner",
+  "firstName":"Test Owner",
+  "lastName":"Last",
+  "email":"testowner@abc.com",
+  "dob":"1990-01-01",
+  "gender":"M",
+  "password":"password",
+  "location":{"latitude": 0.00, "longitude": 0.0}
+}

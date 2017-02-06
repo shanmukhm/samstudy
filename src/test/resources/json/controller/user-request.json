@@ -1,0 +1,13 @@
+{
+  "userId": "testuser",
+  "firstName": "Test User",
+  "lastName": "Last",
+  "email": "test@abc.com",
+  "dob": "1990-01-01",
+  "gender": "M",
+  "location": {"latitude": 0.00, "longitude": 0.0},
+  "favouriteSalads": ["favSalad1", "favSalad2"],
+  "customSalads": [
+    "mysalad1", "mysalad2"
+  ]
+}

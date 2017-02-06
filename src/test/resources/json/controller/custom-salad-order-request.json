@@ -1,0 +1,16 @@
+{
+  "orderId": "testorder",
+  "sallyId": "testsally",
+  "userId": "testuser",
+  "isCustomSalad": true,
+  "ingredientList": [
+    {
+      "ingredientId": "test-ing1",
+      "quantity": "small"
+    },
+    {
+      "ingredientId": "test-ing2",
+      "quantity": "large"
+    }
+  ]
+}
