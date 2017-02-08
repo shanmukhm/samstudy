@@ -72,15 +72,11 @@ public class FormServiceImpl implements FormService {
                 }
 
                 rows.put( jRow );
-                System.out.println(columnCount);
                 rowCount++;
             }
 
             // Create the JSON.
             json.put( "rows", rows );
-
-            // Get the JSON text.
-            System.out.println(formatJson(json).toString());
 
             JSONObject formJson = formatJson(json);
             formJson.getJSONObject("metadata").put("name", sheetName);
