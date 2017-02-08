@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +31,8 @@ public class FormServiceImpl implements FormService {
     private FormRepository formRepository;
     @Autowired
     private FormSubmissionDataRepository submissionRepository;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Override
     public ModelMap convertAndSave(MultipartFile file) throws IOException, InvalidFormatException {
@@ -44,7 +47,6 @@ public class FormServiceImpl implements FormService {
             JSONArray rows = new JSONArray();
             // Iterate through the rows.
             int rowCount = 0;
-            int totalColumns = 0;
             List<String> columnTitles = new ArrayList<>();
             for (Iterator<Row> rowIterator = sheet.rowIterator(); rowIterator.hasNext(); ) {
                 Row row = rowIterator.next();
@@ -103,10 +105,13 @@ public class FormServiceImpl implements FormService {
 
     @Override
     public List<FormAndVersion> getFormsWithVersions() {
+        List<String> formIds = mongoTemplate.getDb().getCollection("forms").distinct("formId");
         List<Form> forms = formRepository.findAll();
         List<FormAndVersion> formsWithVersions = new ArrayList<>();
-        for (int i = 0; i < forms.size(); i++) {
-            formsWithVersions.add(new FormAndVersion(forms.get(i).getFormId(), forms.get(i).getVersion()));
+        for (int i = 0; i < formIds.size(); i++) {
+            Form form = formRepository.findByFormIdAndLatestVersion(formIds.get(i), new PageRequest(0, 1,
+                    Sort.Direction.DESC, "version")).getContent().get(0);
+            formsWithVersions.add(new FormAndVersion(form.getFormId(), form.getVersion()));
         }
 
         return formsWithVersions;
