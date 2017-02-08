@@ -1,7 +1,0 @@
-{
-  "orderId": "testorder",
-  "sallyId": "testsally",
-  "userId": "testuser",
-  "isCustomSalad": false,
-  "salad":{"saladId": "testsalad", "quantity":"large"}
-}

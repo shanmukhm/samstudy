@@ -21,9 +21,9 @@
         http://www.springframework.org/schema/task/spring-task-4.3.xsd">
 
     <context:component-scan
-            base-package="com.casabots.pantry.controller, com.casabots.pantry.service.impl, com.casabots.pantry.security,
-com.casabots.pantry.reporting, com.casabots.pantry.util"/>
-    <mongo:repositories base-package="com.casabots.pantry.repository"/>
+            base-package="com.samstudy.controller, com.samstudy.service.impl, com.samstudy.security,
+ com.samstudy.util"/>
+    <mongo:repositories base-package="com.samstudy.repository"/>
     <mvc:annotation-driven/>
     <task:annotation-driven/>
     <context:property-placeholder location="classpath:pantry-db.properties"/>
@@ -38,8 +38,6 @@ com.casabots.pantry.reporting, com.casabots.pantry.util"/>
     </bean>
     <mongo:db-factory host="${mongo.host}" port="${mongo.port}" dbname="${mongo.dbName}"/>
 
-    <bean id="dataBaseMigrationService" class="com.casabots.pantry.reporting.migration.DataBaseMigrationService"/>
-
     <bean id="mongoClient" class="com.mongodb.MongoClient">
     </bean>
 
@@ -47,12 +45,12 @@ com.casabots.pantry.reporting, com.casabots.pantry.util"/>
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
     </bean>
 
-    <bean id="pantryRealm" class="com.casabots.pantry.security.PantryRealm">
+    <bean id="samStudyRealm" class="com.samstudy.security.SamStudyRealm">
         <property name="credentialsMatcher" ref="customMatcher"/>
     </bean>
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="pantryRealm"/>
+        <property name="realm" ref="samStudyRealm"/>
     </bean>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
@@ -71,45 +69,39 @@ com.casabots.pantry.reporting, com.casabots.pantry.util"/>
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="filterChainDefinitions">
-            <value>
-            </value>
-        </property>
+            <value></value>
+                </property>
     </bean>
 
-    <!--For Reporting-->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="${mysql.driver}"/>
-        <property name="url" value="${mysql.url}"/>
-        <property name="username" value="${mysql.username}"/>
-        <property name="password" value="${mysql.password}"/>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10000000"/>
     </bean>
-    <!-- Hibernate 4 SessionFactory Bean definition -->
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>com.casabots.pantry.reporting.model.Ingredient</value>
-                <value>com.casabots.pantry.reporting.model.Size</value>
-                <value>com.casabots.pantry.reporting.model.Location</value>
-                <value>com.casabots.pantry.reporting.model.Portion</value>
-                <value>com.casabots.pantry.reporting.model.Salad</value>
-                <value>com.casabots.pantry.reporting.model.Sally</value>
-                <value>com.casabots.pantry.reporting.model.User</value>
-                <value>com.casabots.pantry.reporting.model.Order</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.show_sql">false</prop>
-            </props>
-        </property>
-    </bean>
-    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+
+    <!--&lt;!&ndash;For Reporting&ndash;&gt;-->
+    <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"-->
+          <!--destroy-method="close">-->
+        <!--<property name="driverClassName" value="${mysql.driver}"/>-->
+        <!--<property name="url" value="${mysql.url}"/>-->
+        <!--<property name="username" value="${mysql.username}"/>-->
+        <!--<property name="password" value="${mysql.password}"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; Hibernate 4 SessionFactory Bean definition &ndash;&gt;-->
+    <!--<bean id="sessionFactory"-->
+          <!--class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="annotatedClasses">-->
+            <!---->
+        <!--</property>-->
+        <!--<property name="hibernateProperties">-->
+            <!--<props>-->
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>-->
+                <!--<prop key="hibernate.show_sql">false</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--</bean>-->
 
 </beans>
