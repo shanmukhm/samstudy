@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.casabots</groupId>
-    <artifactId>samstudy</artifactId>
+    <groupId>com.samstudy</groupId>
+    <artifactId>forms-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Casabots Sally API</name>
+    <name>SamStudy Forms API</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -106,24 +106,7 @@
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-        <!--Google OAuth 2 client library-->
-        <dependency>
-            <groupId>com.google.api-client</groupId>
-            <artifactId>google-api-client</artifactId>
-            <version>${google.api.version}</version>
-        </dependency>
-        <!--Hibernate for managing reporting db-->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <!--MySQL connector-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.9</version>
-        </dependency>
+
         <!--For Testing-->
         <dependency>
             <groupId>junit</groupId>
@@ -200,19 +183,6 @@
                 <source>${jdk.version}</source>
                 <target>${jdk.version}</target>
             </configuration>
-            </plugin>
-
-            <!--SoapUI plugin-->
-            <plugin>
-                <groupId>com.smartbear.soapui</groupId>
-                <artifactId>soapui-maven-plugin</artifactId>
-                <version>5.2.0</version>
-                <configuration>
-                    <projectFile>casabots-soapui-project.xml</projectFile>
-                    <projectProperties>
-                        <value>message=Hello World!</value>
-                    </projectProperties>
-                </configuration>
             </plugin>
         </plugins>
 
