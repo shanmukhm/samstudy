@@ -40,7 +40,7 @@ public class FormController {
 
     @RequiresRoles(USER_ROLE)
     @RequestMapping(method = RequestMethod.GET, path = "/getForm")
-    public String getForm(@RequestParam String formId, @RequestParam int version) {
-        return formService.getForm(formId, version);
+    public String getForm(@RequestParam String name, @RequestParam int version) {
+        return formService.getForm(name, version);
     }
 }

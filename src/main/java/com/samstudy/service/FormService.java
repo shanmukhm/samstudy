@@ -17,5 +17,5 @@ public interface FormService {
 
     List<FormAndVersion> getFormsWithVersions();
 
-    String getForm(String formId, int version);
+    String getForm(String name, int version);
 }

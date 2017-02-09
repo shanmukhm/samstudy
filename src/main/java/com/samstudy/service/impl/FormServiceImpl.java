@@ -79,11 +79,11 @@ public class FormServiceImpl implements FormService {
             json.put( "rows", rows );
 
             JSONObject formJson = formatJson(json);
-            formJson.getJSONObject("metadata").put("name", sheetName);
+            formJson.getJSONObject("metadata").put("name", formatKey(sheetName));
             String formId = formJson.getJSONObject("metadata").getString("id");
             int version = formJson.getJSONObject("metadata").getInt("version");
 
-            formRepository.insert(new Form(formId, sheetName, version, formJson.toString()));
+            formRepository.insert(new Form(formId, formatKey(sheetName), version, formJson.toString()));
         }
         mp.addAttribute("msg", "Imported " + workbook.getNumberOfSheets() + " forms from xls sheet");
         return mp;
@@ -101,13 +101,13 @@ public class FormServiceImpl implements FormService {
 
     @Override
     public List<FormAndVersion> getFormsWithVersions() {
-        List<String> formIds = mongoTemplate.getDb().getCollection("forms").distinct("formId");
+        List<String> formNames = mongoTemplate.getDb().getCollection("forms").distinct("name");
         List<Form> forms = formRepository.findAll();
         List<FormAndVersion> formsWithVersions = new ArrayList<>();
-        for (int i = 0; i < formIds.size(); i++) {
-            Form form = formRepository.findByFormIdAndLatestVersion(formIds.get(i), new PageRequest(0, 1,
+        for (int i = 0; i < formNames.size(); i++) {
+            Form form = formRepository.findByNameAndLatestVersion(formNames.get(i), new PageRequest(0, 1,
                     Sort.Direction.DESC, "version")).getContent().get(0);
-            formsWithVersions.add(new FormAndVersion(form.getFormId(), form.getVersion()));
+            formsWithVersions.add(new FormAndVersion(form.getName(), form.getVersion()));
         }
 
         return formsWithVersions;
@@ -115,7 +115,7 @@ public class FormServiceImpl implements FormService {
 
     @Override
     public String getForm(String formId, int version) {
-        Form form = formRepository.findByFormIdAndVersion(formId, version);
+        Form form = formRepository.findByNameAndVersion(formId, version);
         return form.getFormJson();
     }
 

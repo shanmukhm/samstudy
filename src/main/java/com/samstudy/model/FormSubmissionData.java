@@ -10,6 +10,7 @@ public class FormSubmissionData {
     private String id;
     private String userId;
     private String formId;
+    private String name;
     private int version;
     private String x;
     private Date submittedDate;
@@ -40,6 +41,14 @@ public class FormSubmissionData {
 
     public void setFormId(String formId) {
         this.formId = formId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getVersion() {

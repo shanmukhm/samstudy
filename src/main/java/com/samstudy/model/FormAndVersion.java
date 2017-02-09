@@ -2,19 +2,23 @@ package com.samstudy.model;
 
 public class FormAndVersion {
 
-    private String formId;
+    private String name;
     private int version;
 
     public FormAndVersion() {
     }
 
-    public FormAndVersion(String formId, int version) {
-        this.formId = formId;
+    public FormAndVersion(String name, int version) {
+        this.name = name;
         this.version = version;
     }
 
-    public String getFormId() {
-        return formId;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getVersion() {
@@ -25,7 +29,4 @@ public class FormAndVersion {
         this.version = version;
     }
 
-    public void setFormId(String formId) {
-        this.formId = formId;
-    }
 }
