@@ -8,8 +8,8 @@ package com.samstudy.controller;
 import com.samstudy.model.User;
 import com.samstudy.security.LoginUser;
 import com.samstudy.service.UserService;
-import com.samstudy.util.SessionUtils;
 import com.samstudy.util.Constants;
+import com.samstudy.util.SessionUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +17,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("users")

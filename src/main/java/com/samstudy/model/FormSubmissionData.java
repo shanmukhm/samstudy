@@ -9,7 +9,6 @@ public class FormSubmissionData {
     @Id
     private String id;
     private String userId;
-    private String formId;
     private String name;
     private int version;
     private String x;
@@ -33,14 +32,6 @@ public class FormSubmissionData {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getFormId() {
-        return formId;
-    }
-
-    public void setFormId(String formId) {
-        this.formId = formId;
     }
 
     public String getName() {

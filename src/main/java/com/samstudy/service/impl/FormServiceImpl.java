@@ -86,6 +86,7 @@ public class FormServiceImpl implements FormService {
             formRepository.insert(new Form(formId, formatKey(sheetName), version, formJson.toString()));
         }
         mp.addAttribute("msg", "Imported " + workbook.getNumberOfSheets() + " forms from xls sheet");
+        mp.addAttribute("status", 0);
         return mp;
     }
 
@@ -94,9 +95,9 @@ public class FormServiceImpl implements FormService {
         formData.setUserId(SessionUtils.getCurrentUserId());
         formData.setSubmittedDate(new Date());
         submissionRepository.insert(formData);
-        Form latestForm = formRepository.findByFormIdAndLatestVersion(formData.getFormId(), new PageRequest(0, 1,
-                Sort.Direction.DESC, "version")).getContent().get(0);
-        return new ModelMap("msg", formData.getUserId() + " submitted form : " + formData.getFormId() + " successfully");
+        ModelMap mp = new ModelMap("msg", formData.getUserId() + " submitted form : " + formData.getName() + " successfully");
+        mp.addAttribute("status", 0);
+        return mp;
     }
 
     @Override
