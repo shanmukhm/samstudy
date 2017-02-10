@@ -39,7 +39,7 @@ public class FormController {
     }
 
     @RequiresRoles(USER_ROLE)
-    @RequestMapping(method = RequestMethod.GET, path = "/getForm")
+    @RequestMapping(method = RequestMethod.GET, path = "/getForm", produces={"application/json; charset=UTF-8"})
     public String getForm(@RequestParam String name, @RequestParam int version) {
         return formService.getForm(name, version);
     }
